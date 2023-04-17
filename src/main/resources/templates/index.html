@@ -56,10 +56,10 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">Id</th>
-									<th scope="col">Name</th>
+									<th scope="col"><a th:href="@{'/page/'+${pageNo}+'?sortField=id&sortDir='+${revSortDir}}">Id</a></th>
+									<th scope="col"><a th:href="@{'/page/'+${pageNo}+'?sortField=productName&sortDir='+${revSortDir}}">Name</a></th>
 									<th scope="col">Description</th>
-									<th scope="col">Price</th>
+									<th scope="col"><a th:href="@{'/page/'+${pageNo}+'?sortField=price&sortDir='+${revSortDir}}">Price</a></th>
 									<th scope="col">Quantity</th>
 									<th scope="col">Action</th>
 								</tr>
@@ -80,6 +80,27 @@
 									
 							</tbody>
 						</table>
+					</div>
+					
+					<div class="card-footer">
+					<div class="row">
+					<div class="col-md-6">
+						<p>Total Elements : [[${totalElements}]]</p>
+					</div>
+					<div class="col-md-6">
+					<nav aria-label= "Page navigation example">
+					<ul class="pagination">
+					<li  th:classappend="${pageNo==0} ? 'disabled' : '' " class="page-item"><a class="page-link" th:href="@{'/page/'+${pageNo-1}}">Previous</a></li>
+					<li th:each="i: ${#numbers.sequence(1,totalPage)}" class="page-item" th:classappend="${pageNo+1==i} ? 'active' : ''">
+					<a class="page-link" th:href="@{'/page/'+${i-1}}+ '?sortField='+${sortField}+ '&sortDir='+${sortDir} ">[[${i}]]</a></li>
+					
+					<li th:classappend="${pageNo+1 == totalPage} ? 'disabled' : '' " class="page-item"><a class="page-link" th:href="@{'/page/'+ ${pageNo+1}}">Next</a></li>
+					</ul>
+					</nav>
+					</div>
+					</div>
+					
+					
 					</div>
 				</div>
 			</div>
